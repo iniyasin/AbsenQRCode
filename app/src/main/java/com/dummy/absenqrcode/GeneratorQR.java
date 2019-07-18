@@ -15,6 +15,7 @@ import org.w3c.dom.Text;
 public class GeneratorQR extends AppCompatActivity {
     private TextView nim;
     private TextView nama;
+    private String id;
     private ImageView qrcode;
     private Button btn_logout;
 
@@ -28,7 +29,7 @@ public class GeneratorQR extends AppCompatActivity {
         qrcode = (ImageView)findViewById(R.id.qrcode);
         btn_logout = (Button)findViewById(R.id.btn_logout);
         Bitmap bitmap = getIntent().getParcelableExtra("pic");
-        Bitmap bitmap1 = getIntent().getParcelableExtra("pic1");
+        //Bitmap bitmap1 = getIntent().getParcelableExtra("pic1");
         qrcode.setImageBitmap(bitmap);
 
         btn_logout.setOnClickListener(new View.OnClickListener() {

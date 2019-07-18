@@ -7,4 +7,11 @@
     <string name="logout">Logout</string>
     <string name="nama">Nama</string>
     <string name="qrcode">QRCode</string>
+    <string name="absen">Absen</string>
+    <string name="input_data_bimbingan">Input Data Bimbingan</string>
+    <string name="submit">Submit</string>
+    <string name="materi">Materi</string>
+    <string name="progres">Progres</string>
+    <string name="masalah">Masalah</string>
+    <string name="revisi">Revisi</string>
 </resources>

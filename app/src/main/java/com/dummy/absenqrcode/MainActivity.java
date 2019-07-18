@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     private final String IMAGE_DIRECTORY = "/QRCode";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String NIM = nim.getText().toString();
-                //String password = pass.getText().toString();
-
-
                 login();
             }
         });
@@ -126,24 +123,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gotoCourseActivity() {
-        final String NIM = nim.getText().toString().trim();
-        final String password = pass.getText().toString().trim();
-        final String kirim = NIM + "\n" + password;
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-
-        try {
-            BitMatrix nimMatrix = multiFormatWriter.encode(kirim, BarcodeFormat.QR_CODE, 200, 200);
-
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(nimMatrix);
-            String path = saveImage(bitmap);
-            Intent intent = new Intent(context, GeneratorQR.class);
-            intent.putExtra("pic", bitmap);
-            startActivity(intent);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-        finish();
+        Intent intent = new Intent(context, HalamanMahasiswa.class);
+        startActivity(intent);
     }
 
     private void showDialog() {
@@ -154,38 +135,6 @@ public class MainActivity extends AppCompatActivity {
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
-    }
-
-    public String saveImage(Bitmap myBitmap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File wallpaperDirectory = new File(
-                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-        // have the object build the directory structure, if needed.
-
-        if (!wallpaperDirectory.exists()) {
-            Log.d("dirrrrrr", "" + wallpaperDirectory.mkdirs());
-            wallpaperDirectory.mkdirs();
-        }
-
-        try {
-            File f = new File(wallpaperDirectory, Calendar.getInstance()
-                    .getTimeInMillis() + ".jpg");
-            f.createNewFile();   //give read write permission
-            FileOutputStream fo = new FileOutputStream(f);
-            fo.write(bytes.toByteArray());
-            MediaScannerConnection.scanFile(this,
-                    new String[]{f.getPath()},
-                    new String[]{"image/jpeg"}, null);
-            fo.close();
-            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
-
-            return f.getAbsolutePath();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        return "";
-
     }
 
 }
